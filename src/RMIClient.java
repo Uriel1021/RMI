@@ -122,7 +122,6 @@ public class RMIClient extends JFrame {
 // Agregar el panel inferior a la ventana
         getContentPane().add(panelInferior, BorderLayout.SOUTH);
 
-
         // Obtener los datos de las vacantes
         obtenerVacantes();
     }

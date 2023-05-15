@@ -8,7 +8,7 @@ import java.rmi.registry.Registry;
 public class RegistroProfesion extends JFrame {
     private JLabel carreraLabel, cedulaLabel, escuelaLabel, anioInicioLabel, anioFinLabel;
     private JTextField carreraField, cedulaField, escuelaField, anioInicioField, anioFinField;
-    private JButton enviarButton;
+    private JButton enviarButton,cerrar;
 
     public RegistroProfesion(int idUsuario) {
         // Configuración del marco
@@ -31,11 +31,19 @@ public class RegistroProfesion extends JFrame {
         anioFinField = new JTextField();
 
         enviarButton = new JButton("Enviar");
+        cerrar = new JButton("Cerrar");
         // Agregar un ActionListener al botón Registrar
         enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nuevaProfesion(idUsuario);
+            }
+        });
+
+        cerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
 
@@ -52,6 +60,7 @@ public class RegistroProfesion extends JFrame {
         add(anioFinLabel);
         add(anioFinField);
         add(enviarButton);
+        add(cerrar);
 
         // Mostrar el marco
         setVisible(true);
@@ -77,13 +86,13 @@ public class RegistroProfesion extends JFrame {
             // Crear una nueva instancia de Usuario y asignar los valores obtenidos de los campos de texto a los atributos correspondientes
             ModeloProfesion modeloProfesion = new ModeloProfesion();
             modeloProfesion.setIdUsuario(idUsuario);
+            modeloProfesion.setCarreraEstudiada(carrera);
             modeloProfesion.setCedula(cedula);
             modeloProfesion.setEscuela(escuela);
             modeloProfesion.setAnioInicio(inicio);
             modeloProfesion.setAnioFin(fin);
             // Llamar al método crearUsuario() del DaoService, pasando como parámetro la instancia de Vacante creada anteriormente
-            boolean seInserto = false;
-            seInserto = userService.crearProfesion(modeloProfesion,idUsuario);
+            boolean seInserto = userService.crearProfesion(modeloProfesion,idUsuario);
             if (seInserto == true){
                 // Mostrar un mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Usuario registrado correctamente, ahora puede iniciar session", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
@@ -92,6 +101,7 @@ public class RegistroProfesion extends JFrame {
                 JOptionPane.showMessageDialog(this, "No se registro el usuario, intente de nuevo", "Registro erroneo", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se registro el usuario, intente de nuevo"+e.getMessage(), "Registro erroneo", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "No se registro el usuario, intente de nuevo", "Registro erroneo", JOptionPane.INFORMATION_MESSAGE);
         }

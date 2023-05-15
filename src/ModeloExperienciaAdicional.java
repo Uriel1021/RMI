@@ -22,6 +22,10 @@ public class ModeloExperienciaAdicional implements Serializable {
         this.fechaFin = fechaFin;
     }
 
+    public ModeloExperienciaAdicional() {
+
+    }
+
 
     public int getId() {
         return id;

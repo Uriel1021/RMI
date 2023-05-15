@@ -138,7 +138,6 @@ public class InformacionUsuario extends JFrame {
         // Botón para agregar experiencia laboral
         JButton agregarExperienciaLaboralButton = new JButton("Agregar laboral");
         agregarExperienciaLaboralButton.addActionListener(e -> {
-            // Abrir ventana para agregar experiencia adicional
 
         });
         botonesPanel.add(agregarExperienciaLaboralButton);

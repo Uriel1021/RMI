@@ -242,7 +242,7 @@ public class DaoServiceImpl extends UnicastRemoteObject implements DaoService {
 
     public boolean crearProfesion(ModeloProfesion profesion, int id) throws RemoteException {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
-            String sql = "INSERT INTO Profesion (id, idUsuario, carerraEstudiada, cedula, escuela, anioInicio, anioFin) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Profesion (id, idUsuario, carreraEstudiada, cedula, escuela, anioInicio, anioFin) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, profesion.getId());
             stmt.setInt(2, id);
@@ -254,6 +254,7 @@ public class DaoServiceImpl extends UnicastRemoteObject implements DaoService {
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted == 1;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
             return false;
         }
